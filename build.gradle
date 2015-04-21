@@ -2,9 +2,11 @@
 
 buildscript {
     repositories {
+        // 远程依赖库
         jcenter()
     }
     dependencies {
+        // gradle对应插件版本信息(必须和gradle对应)
         classpath 'com.android.tools.build:gradle:1.1.0'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -12,8 +14,14 @@ buildscript {
     }
 }
 
+// 为所有文件添加统一配置
 allprojects {
     repositories {
         jcenter()
     }
 }
+// 为单个子工程添加配置
+subprojects{
+
+}
+
