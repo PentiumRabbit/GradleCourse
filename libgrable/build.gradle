@@ -11,6 +11,7 @@ android {
     //  defaultPublishConfig "channal2Release"
 
     // 将库项目的所有变种版本都发布也是可能的。我们计划在一般的项目依赖项目（类似于上述所说的）情况下允许这种做法，但是由于Gradle的限制（我们也在努力修复这个问题）现在还不太可能。
+    // 如果是false 只会输出默认arr,其他工程只能依赖默认的
     publishNonDefault true
 
     defaultConfig {
