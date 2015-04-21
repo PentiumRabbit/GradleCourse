@@ -21,7 +21,7 @@ allprojects {
     }
 }
 // 为单个子工程添加配置
-subprojects{
-
-}
+//subprojects{
+//
+//}
 

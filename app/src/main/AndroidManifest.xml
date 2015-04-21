@@ -5,17 +5,34 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/gradle_app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/gradle_app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--获取包名-->
+        <provider
+            android:name=".provider.GradleContentProvider"
+            android:authorities="${applicationId}.provider"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+
+        <!--配置不同的渠道-->
+
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${umeng_channel}"/>
+
+        <meta-data
+            android:name="BAIDU_CHANNEL"
+            android:value="${baidu_channel}"/>
     </application>
 
 </manifest>

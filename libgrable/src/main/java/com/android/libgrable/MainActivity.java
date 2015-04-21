@@ -1,20 +1,23 @@
-package com.android.gradlecourse;
+package com.android.libgrable;
 
 import android.app.Activity;
-import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v4.widget.DrawerLayout;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.android.libgrable.utils.GradleUtil;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -132,8 +135,6 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView section_label= (TextView) rootView.findViewById(R.id.section_label);
-            section_label.setText(GradleUtil.getLidType()+"--"+BuildConfig.FOO);
             return rootView;
         }
 

@@ -12,8 +12,7 @@ def getDate() {
     return formattedDate
 };
 
-
-//设置编码
+// 设置编码
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
@@ -29,7 +28,15 @@ android {
         // 版本名称
         versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}"
         // 版本号
-        versionCode versionMajor * 1000 + versionMinor * 100 + versionPatch*10+versionBuild
+        versionCode versionMajor * 1000 + versionMinor * 100 + versionPatch * 10 + versionBuild
+
+        buildConfigField "boolean", "DEBUG_MODEL", "false"
+        // 字符串类型
+        buildConfigField "String", "FOO", "\"defaultConfig\""
+        // 增加资源文件的属性值
+        resValue "string", "gradle_app_name", "gradle_test"
+
+        resValue "string", "gradle_app_name", "gradle_default"
     }
     // 构建时,忽略lint检查
     lintOptions {
@@ -39,12 +46,16 @@ android {
     signingConfigs {
         //release的keystore信息
         release {
-            storeFile file("baofeng.keystore")
-            storePassword "Xr780o22Qa"
+            storeFile file("KeyStore.jks")
+            storePassword "zoruyg"
             keyAlias "baofeng"
-            keyPassword "Xr780o22Qa"
+            keyPassword "zoruyg"
         }
         debug {
+            storeFile file("KeyStore_Debug.jks")
+            storePassword "zoruyg"
+            keyAlias "baofeng"
+            keyPassword "zoruyg"
         }
     }
     buildTypes {
@@ -52,7 +63,7 @@ android {
             // 文件对齐压缩
             zipAlignEnabled true
             // 移除未使用的资源
-            shrinkResources true
+//            shrinkResources true
             // 调用签名文件
             signingConfig signingConfigs.release
             // 是否使用混淆文件
@@ -62,11 +73,10 @@ android {
             // 为该类型设置属性值
             buildConfigField "boolean", "DEBUG_MODEL", "false"
             // 字符串类型
-            buildConfigField "String", "FOO", "\"bar\""
+            buildConfigField "String", "FOO", "\"release\""
             // 增加资源文件的属性值
-            resValue "string", "foo", "foosss2"
-        }
-        Test {
+            resValue "string", "gradle_app_name", "gradle_release"
+
         }
         debug {
             debuggable true
@@ -79,24 +89,55 @@ android {
             applicationIdSuffix '.debug'
             versionNameSuffix '.debug'
             zipAlignEnabled false
+            // 字符串类型
+            buildConfigField "String", "FOO", "\"debug\""
+            // 增加资源文件的属性值
+            resValue "string", "gradle_app_name", "gradle_debug"
         }
     }
-    dexOptions {
-        // 是否进行多dex打包,可以解决6万方法问题
-        incremental true
-    }
+//    dexOptions {
+//        // 是否进行多dex打包,可以解决6万方法问题
+//        incremental true
+//    }
     compileOptions {
         // 配置jdk版本
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
     productFlavors {
+        channal {
+            // 对占位符进行替换
+            manifestPlaceholders = [umeng_channel: "umeng_gradle", baidu_channel: "umeng_gradle"]
+        }
+    }
+
+    // 为代码指定路径
+    sourceSets {
+        main {
+//        manifest.srcFile 'AndroidManifest.xml'
+//        java.srcDirs = ['src']
+//        resources.srcDirs = ['src']
+//        aidl.srcDirs = ['src']
+//        renderscript.srcDirs = ['src']
+//        res.srcDirs = ['res']
+//        assets.srcDirs = ['assets']
+//            http://stackoverflow.com/questions/22985384/runtime-noclassdeffounderror-exception-when-importing-from-eclipse-to-android-st/23059913#23059913
+//            http://stackoverflow.com/questions/21096819/jni-and-gradle-in-android-studio/21111458#21111458
+//            jniLibs.srcDirs = ['libs']  //不可行
+            //配置.so文件调用
+            jni.srcDirs = []
+            jniLibs.srcDir 'libs'
+        }
+
     }
 }
 
+
 dependencies {
     // 依赖libs下面的jar
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(include: '*.jar', dir: 'libs')
     // 远程依赖 V7
     compile 'com.android.support:appcompat-v7:22.0.0'
+    // 依赖本地库
+    compile project(':libgrable')
 }
