@@ -34,8 +34,6 @@ android {
         // 字符串类型
         buildConfigField "String", "FOO", "\"defaultConfig\""
         // 增加资源文件的属性值
-        resValue "string", "gradle_app_name", "gradle_test"
-
         resValue "string", "gradle_app_name", "gradle_default"
     }
     // 构建时,忽略lint检查
