@@ -44,13 +44,13 @@ android {
     signingConfigs {
         //release的keystore信息
         release {
-            storeFile file("KeyStore.jks")
+            storeFile file('E:/WorkSpace/GradleCourse/GradleCourse/KeyStore/KeyStore.jks')
             storePassword "zoruyg"
             keyAlias "baofeng"
             keyPassword "zoruyg"
         }
         debug {
-            storeFile file("KeyStore_Debug.jks")
+            storeFile file('E:/WorkSpace/GradleCourse/GradleCourse/KeyStore/KeyStore_Debug.jks')
             storePassword "zoruyg"
             keyAlias "baofeng"
             keyPassword "zoruyg"
@@ -74,7 +74,6 @@ android {
             buildConfigField "String", "FOO", "\"release\""
             // 增加资源文件的属性值
             resValue "string", "gradle_app_name", "gradle_release"
-
         }
         debug {
             debuggable true
@@ -104,6 +103,10 @@ android {
     }
     productFlavors {
         channal {
+            // 对占位符进行替换
+            manifestPlaceholders = [umeng_channel: "umeng_gradle", baidu_channel: "umeng_gradle"]
+        }
+        channal2 {
             // 对占位符进行替换
             manifestPlaceholders = [umeng_channel: "umeng_gradle", baidu_channel: "umeng_gradle"]
         }
@@ -137,5 +140,9 @@ dependencies {
     // 远程依赖 V7
     compile 'com.android.support:appcompat-v7:22.0.0'
     // 依赖本地库
+    // 默认类型的输出,依赖默认类型的输出库
     compile project(':libgrable')
+    // channal2依赖channal2Debug的库
+    channal2Compile project(path: ':libgrable', configuration: 'channal2Debug')
+    channalCompile project(path: ':libgrable', configuration: 'channal2Release')
 }

@@ -4,6 +4,15 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+    // 注意这里的发布配置名称引用的是完整的变种版本名称.Relesae，debug只适用于项目中没有其它特性版本的时候使用。如果你想要使用其它变种版本取代默认的发布版本，你可以
+    //  defaultPublishConfig "flavor1Debug"
+
+    // 设置默认的版本输出
+    //  defaultPublishConfig "channal2Release"
+
+    // 将库项目的所有变种版本都发布也是可能的。我们计划在一般的项目依赖项目（类似于上述所说的）情况下允许这种做法，但是由于Gradle的限制（我们也在努力修复这个问题）现在还不太可能。
+    publishNonDefault true
+
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 22
@@ -11,18 +20,55 @@ android {
         versionName "1.0"
         buildConfigField "String", "lib_ver", "\"libDefult\""
     }
+
+
+
+
+
+
+    //为不同的buildTypes配置签名
+    signingConfigs {
+        //release的keystore信息
+        release {
+            storeFile file("KeyStore.jks")
+            storePassword "zoruyg"
+            keyAlias "baofeng"
+            keyPassword "zoruyg"
+        }
+        debug {
+            storeFile file("KeyStore_Debug.jks")
+            storePassword "zoruyg"
+            keyAlias "baofeng"
+            keyPassword "zoruyg"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "lib_ver", "\"libRelease\""
+            // 调用签名文件
+            signingConfig signingConfigs.release
         }
-        releassse {
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "lib_ver", "\"libreleassse\""
+            buildConfigField "String", "lib_ver", "\"libredebug\""
+            // 调用签名文件
+            signingConfig signingConfigs.debug
         }
     }
+    productFlavors {
+        channal {
+            // 对占位符进行替换
+            manifestPlaceholders = [umeng_channel: "umeng_gradle", baidu_channel: "umeng_gradle"]
+        }
+        channal2 {
+            // 对占位符进行替换
+            manifestPlaceholders = [umeng_channel: "umeng_gradle", baidu_channel: "umeng_gradle"]
+        }
+    }
+
 }
 
 dependencies {
