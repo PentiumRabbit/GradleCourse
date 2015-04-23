@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     // 注意这里的发布配置名称引用的是完整的变种版本名称.Relesae，debug只适用于项目中没有其它特性版本的时候使用。如果你想要使用其它变种版本取代默认的发布版本，你可以
-    //  defaultPublishConfig "flavor1Debug"
+//      defaultPublishConfig "flavor1Debug"
 
     // 设置默认的版本输出
     //  defaultPublishConfig "channal2Release"
@@ -60,13 +60,13 @@ android {
         }
     }
     productFlavors {
-        channal {
+        libchannal {
             // 对占位符进行替换
-            manifestPlaceholders = [umeng_channel: "umeng_gradle", baidu_channel: "umeng_gradle"]
+            manifestPlaceholders = [umeng_channel: "libchannal", baidu_channel: "libchannal1"]
         }
-        channal2 {
+        libbaidu {
             // 对占位符进行替换
-            manifestPlaceholders = [umeng_channel: "umeng_gradle", baidu_channel: "umeng_gradle"]
+            manifestPlaceholders = [umeng_channel: "libbaidu", baidu_channel: "libbaidu1"]
         }
     }
 
@@ -74,5 +74,5 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:appcompat-v7:22.1.0'
 }

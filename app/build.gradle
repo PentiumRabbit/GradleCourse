@@ -104,11 +104,11 @@ android {
     productFlavors {
         channal {
             // 对占位符进行替换
-            manifestPlaceholders = [umeng_channel: "umeng_gradle", baidu_channel: "umeng_gradle"]
+            manifestPlaceholders = [umeng_channel: "channal", baidu_channel: "channal1"]
         }
-        channal2 {
+        baidu {
             // 对占位符进行替换
-            manifestPlaceholders = [umeng_channel: "umeng_gradle", baidu_channel: "umeng_gradle"]
+            manifestPlaceholders = [umeng_channel: "baidu", baidu_channel: "baidu1"]
         }
     }
 
@@ -137,14 +137,22 @@ android {
 dependencies {
     // 依赖libs下面的jar
     compile fileTree(include: '*.jar', dir: 'libs')
-    // 远程依赖 V7
-    compile 'com.android.support:appcompat-v7:22.0.0'
+
     // 远程依赖json,格式: groupId:artifactId:version
     compile 'com.google.code.gson:gson:2.3.1'
+
+    // 远程依赖 V7
+    compile 'com.android.support:appcompat-v7:22.1.0'
+
     // 依赖本地库
     // 默认类型的输出,依赖默认类型的输出库
+    // 如果依赖的lib库中也配置了productFlavors,需要指定依赖哪一个类型的库才行,要不然找不到依赖的库
+    // 如果依赖自定的库,就不能配置defaultPublishConfig,并且需要把publishNonDefault打开 bug?
+
+    // debugCompile productFlavors和buildTypes只能二选一...(@﹏@)~
     compile project(':libgrable')
     // channal2依赖channal2Debug的库
-    channal2Compile project(path: ':libgrable', configuration: 'channal2Debug')
-    channalCompile project(path: ':libgrable', configuration: 'channal2Release')
+//    baiduCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
+//    baiduCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
+    debugCompile project(path: ':libgrable', configuration: 'libchannalRelease')
 }
