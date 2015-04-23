@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.libgrable.utils.GradleUtil;
+import com.google.gson.Gson;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -134,6 +135,7 @@ public class MainActivity extends ActionBarActivity
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView section_label= (TextView) rootView.findViewById(R.id.section_label);
             section_label.setText(GradleUtil.getLidType()+"--"+BuildConfig.FOO);
+            Gson gson=new Gson();
             return rootView;
         }
 

@@ -139,6 +139,8 @@ dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
     // 远程依赖 V7
     compile 'com.android.support:appcompat-v7:22.0.0'
+    // 远程依赖json,格式: groupId:artifactId:version
+    compile 'com.google.code.gson:gson:2.3.1'
     // 依赖本地库
     // 默认类型的输出,依赖默认类型的输出库
     compile project(':libgrable')

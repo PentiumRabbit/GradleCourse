@@ -2,7 +2,7 @@
 
 buildscript {
     repositories {
-        // 远程依赖库
+        // 远程依赖库,也可以自定义
         jcenter()
     }
     dependencies {
