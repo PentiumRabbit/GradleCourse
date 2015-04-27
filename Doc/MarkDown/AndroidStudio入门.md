@@ -50,7 +50,7 @@
     ![QQ截图20150414180555.png](.\QQ截图20150414180555.png)
     project:是指关联整个项目
     Director:是指关联单个目录
-    
+
     4. 配置ignore
     ![QQ截图20150427113213.png](.\QQ截图20150427113213.png)
 	![QQ截图20150427113231.png](.\QQ截图20150427113231.png)
@@ -67,16 +67,21 @@
 - 直接导入,适合小工程,目录结构简单,对于目录结构复杂的工程没办法识别(多工程依赖等)
 - 由Eclipse导出gradle,然后由studio打开
 	由Eclipse导出的工程,由于ADT版本更新跟不上Studio更新,导致并不能直接使用,需要修改下导出工程的配置
-1.     打开导出工程目录的gradle\wrapper\gradle-wrapper将distributionUrl=http\://services.gradle.org/distributions/gradle-1.12-all.zip修改成AndroidStudio对应的gradle版本号,这个版本号可以看studio自带的gradle,去studio文件中查找 D:\Development\android-studio\gradle\gradle-2.2.1 ,所以改成2.2.1就好了
-1.     打开导出工程中build文件
-2.     修改classpath 'com.android.tools.build:gradle:1.1.0',这个是androiStudio gradle插件版本
-3. 	   然后在studio中打开就行了,如果出现studio下载gradle的情况,  可以关掉studio,去自己的账户目录.gradle/wraper/dists/目录下,手动添加压缩包
+    1.     打开导出工程目录的gradle\wrapper\gradle-wrapper将distributionUrl=http\://services.gradle.org/distributions/gradle-1.12-all.zip修改成AndroidStudio对应的gradle版本号,这个版本号可以看studio自带的gradle,去studio文件中查找 D:\Development\android-studio\gradle\gradle-2.2.1 ,所以改成2.2.1就好了
+    1.     打开导出工程中build文件
+    2.     修改classpath 'com.android.tools.build:gradle:1.1.0',这个是androiStudio gradle插件版本
+    3. 	   然后在studio中打开就行了,如果出现studio下载gradle的情况,  可以关掉studio,去自己的账户目录.gradle/wraper/dists/目录下,手动添加压缩包
 
-[点击查看](http://www.open-open.com/lib/view/open1421580998718.html)
+- 如果存在.so的文件,需要在sourceSets.main中添加
+```java
+    //配置.so文件调用
+    jni.srcDirs = []
+    jniLibs.srcDir 'libs'
+```
+renderscriptOptimLevel
+	http://www.open-open.com/lib/view/open1421580998718.html
 	http://www.tuicool.com/articles/Z363Yj3
-
 	http://tools.android.com/tech-docs/new-build-system
-
 	http://www.tuicool.com/articles/MZ77R3
 
 
@@ -86,6 +91,17 @@
 ### BUG调试
 
 ### 单元测试
+
+~~首先需要依赖 androidTestCompile 'junit:junit:4.12',如果不依赖,可以去stduio中下载相应的插件
+Android Studio Unit test,如果出现 Failed to resolve: junit:junit:4.12 说明没从远程库中下下来~~
+
+- 需要指定test的目录
+
+```java
+	// 指定测试代码的位置
+	java.srcDirs = ['androidTest/java']
+
+```
 
 - 继承AndroidTestCase,写一个public 空的构造函数
 - 方法名必须以test开头 jcenter

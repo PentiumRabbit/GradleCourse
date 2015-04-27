@@ -132,6 +132,7 @@ android {
             //配置.so文件调用
             jni.srcDirs = []
             jniLibs.srcDir 'libs'
+
         }
 
     }
@@ -155,6 +156,7 @@ dependencies {
     //    baiduCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
     releaseCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
     debugCompile project(path: ':libgrable', configuration: 'libchannalRelease')
+//    androidTestCompile project(path: ':libgrable', configuration: 'libchannalRelease')
 }
 
 task hello << {

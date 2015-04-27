@@ -2,8 +2,11 @@
 
 buildscript {
     repositories {
+
         // 远程依赖库,也可以自定义
         jcenter()
+        // 老的远程依赖
+        mavenCentral()
     }
     dependencies {
         // gradle对应android插件版本信息(必须和gradle对应)
@@ -17,7 +20,14 @@ buildscript {
 // 为所有文件添加统一配置
 allprojects {
     repositories {
+
         jcenter()
+
+        mavenCentral()
+        maven {
+            // 自定义远程依赖 maven仓库地址
+            url 'http://repository.sonatype.org/content/groups/public/'
+        }
     }
 }
 // 为单个子工程添加配置
