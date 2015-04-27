@@ -44,13 +44,13 @@ android {
     signingConfigs {
         //release的keystore信息
         release {
-            storeFile file('E:/MyWork/WorkSpace/GitCode/GradleCourse/KeyStore/KeyStore.jks')
+            storeFile file('E:/WorkSpace/GitCode/GradleCourse/KeyStore/KeyStore.jks')
             storePassword "zoruyg"
             keyAlias "baofeng"
             keyPassword "zoruyg"
         }
         debug {
-            storeFile file('E:/MyWork/WorkSpace/GitCode/GradleCourse/KeyStore/KeyStore_Debug.jks')
+            storeFile file('E:/WorkSpace/GitCode/GradleCourse/KeyStore/KeyStore_Debug.jks')
             storePassword "zoruyg"
             keyAlias "baofeng"
             keyPassword "zoruyg"
@@ -141,11 +141,11 @@ android {
 
 dependencies {
     // 依赖libs下面的jar
-    compile fileTree(dir: 'libs', include: '*.jar')
+    compile fileTree(include: '*.jar', dir: 'libs')
     // 远程依赖json,格式: groupId:artifactId:version
     compile 'com.google.code.gson:gson:2.3.1'
     // 远程依赖 V7
-    compile 'com.android.support:appcompat-v7:22.1.0'
+    compile 'com.android.support:appcompat-v7:22.1.1'
     // 依赖本地库
     // 默认类型的输出,依赖默认类型的输出库
     // 如果依赖的lib库中也配置了productFlavors,需要指定依赖哪一个类型的库才行,要不然找不到依赖的库
@@ -156,7 +156,7 @@ dependencies {
     //    baiduCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
     releaseCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
     debugCompile project(path: ':libgrable', configuration: 'libchannalRelease')
-//    androidTestCompile project(path: ':libgrable', configuration: 'libchannalRelease')
+    //    androidTestCompile project(path: ':libgrable', configuration: 'libchannalRelease')
 }
 
 task hello << {
