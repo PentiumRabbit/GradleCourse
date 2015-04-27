@@ -31,13 +31,13 @@ android {
     signingConfigs {
         //release的keystore信息
         release {
-            storeFile file("KeyStore.jks")
+            storeFile file('E:/MyWork/WorkSpace/GitCode/GradleCourse/KeyStore/KeyStore.jks')
             storePassword "zoruyg"
             keyAlias "baofeng"
             keyPassword "zoruyg"
         }
         debug {
-            storeFile file("KeyStore_Debug.jks")
+            storeFile file('E:/MyWork/WorkSpace/GitCode/GradleCourse/KeyStore/KeyStore_Debug.jks')
             storePassword "zoruyg"
             keyAlias "baofeng"
             keyPassword "zoruyg"

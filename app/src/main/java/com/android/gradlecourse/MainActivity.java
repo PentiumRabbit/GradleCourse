@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.libgrable.utils.GradleUtil;
@@ -113,6 +114,14 @@ public class MainActivity extends ActionBarActivity
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private TextView section_label;
+        private ImageView iv_show;
+        private TextView tv_package_name;
+        private TextView tv_version;
+        private TextView tv_buildtypes;
+        private TextView tv_flover;
+        private TextView tv_umeng_channel;
+        private TextView tv_baidu_channel;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -133,9 +142,9 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView section_label= (TextView) rootView.findViewById(R.id.section_label);
-            section_label.setText(GradleUtil.getLidType()+"--"+BuildConfig.FOO);
-            Gson gson=new Gson();
+            initViews(rootView);
+
+            Gson gson = new Gson();
             return rootView;
         }
 
@@ -144,6 +153,23 @@ public class MainActivity extends ActionBarActivity
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+
+        private void initViews(View root) {
+            section_label = (TextView) root.findViewById(R.id.section_label);
+            iv_show = (ImageView) root.findViewById(R.id.iv_show);
+            tv_package_name = (TextView) root.findViewById(R.id.tv_package_name);
+            tv_version = (TextView) root.findViewById(R.id.tv_version);
+            tv_buildtypes = (TextView) root.findViewById(R.id.tv_buildtypes);
+            tv_flover = (TextView) root.findViewById(R.id.tv_flover);
+            tv_umeng_channel = (TextView) root.findViewById(R.id.tv_umeng_channel);
+            tv_baidu_channel = (TextView) root.findViewById(R.id.tv_baidu_channel);
+            iv_show.setImageResource(R.drawable.icon_qq);
+            section_label.setText("lib version : " + GradleUtil.getLidType() + "--BuildConfig FOO:" + BuildConfig.FOO);
+            tv_package_name.setText("packageName : "+BuildConfig.APPLICATION_ID );
+            tv_version.setText("version name:"+BuildConfig.VERSION_NAME);
+            tv_buildtypes.setText("buildtypes :" +BuildConfig.BUILD_TYPE);
+            tv_flover.setText("flover : "+ BuildConfig.FLAVOR);
         }
     }
 

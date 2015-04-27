@@ -44,13 +44,13 @@ android {
     signingConfigs {
         //release的keystore信息
         release {
-            storeFile file('E:/WorkSpace/GradleCourse/GradleCourse/KeyStore/KeyStore.jks')
+            storeFile file('E:/MyWork/WorkSpace/GitCode/GradleCourse/KeyStore/KeyStore.jks')
             storePassword "zoruyg"
             keyAlias "baofeng"
             keyPassword "zoruyg"
         }
         debug {
-            storeFile file('E:/WorkSpace/GradleCourse/GradleCourse/KeyStore/KeyStore_Debug.jks')
+            storeFile file('E:/MyWork/WorkSpace/GitCode/GradleCourse/KeyStore/KeyStore_Debug.jks')
             storePassword "zoruyg"
             keyAlias "baofeng"
             keyPassword "zoruyg"
@@ -103,10 +103,14 @@ android {
     }
     productFlavors {
         channal {
+            versionName "channal"
+            applicationId "com.android.gradlecourse.channal"
             // 对占位符进行替换
             manifestPlaceholders = [umeng_channel: "channal", baidu_channel: "channal1"]
         }
         baidu {
+            versionName 'baidu'
+            applicationId "com.android.gradlecourse.baidu"
             // 对占位符进行替换
             manifestPlaceholders = [umeng_channel: "baidu", baidu_channel: "baidu1"]
         }
@@ -136,23 +140,19 @@ android {
 
 dependencies {
     // 依赖libs下面的jar
-    compile fileTree(include: '*.jar', dir: 'libs')
-
+    compile fileTree(dir: 'libs', include: '*.jar')
     // 远程依赖json,格式: groupId:artifactId:version
     compile 'com.google.code.gson:gson:2.3.1'
-
     // 远程依赖 V7
     compile 'com.android.support:appcompat-v7:22.1.0'
-
     // 依赖本地库
     // 默认类型的输出,依赖默认类型的输出库
     // 如果依赖的lib库中也配置了productFlavors,需要指定依赖哪一个类型的库才行,要不然找不到依赖的库
     // 如果依赖自定的库,就不能配置defaultPublishConfig,并且需要把publishNonDefault打开 bug?
-
     // debugCompile productFlavors和buildTypes只能二选一...(@﹏@)~
     compile project(':libgrable')
     // channal2依赖channal2Debug的库
-//    baiduCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
-//    baiduCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
+    //    baiduCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
+    releaseCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
     debugCompile project(path: ':libgrable', configuration: 'libchannalRelease')
 }
