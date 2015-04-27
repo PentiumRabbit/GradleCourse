@@ -156,3 +156,8 @@ dependencies {
     releaseCompile project(path: ':libgrable', configuration: 'libbaiduDebug')
     debugCompile project(path: ':libgrable', configuration: 'libchannalRelease')
 }
+
+task hello << {
+    println "the current task name is $name"
+    println "hello world"
+}
