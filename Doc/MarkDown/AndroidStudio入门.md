@@ -448,40 +448,7 @@ android {
             proguardFiles 'proguard-project.txt'
             buildConfigField "boolean", "DEBUG_MODEL", "false"
 
-            //apk输出重命名
-//
-//                def file = variant.outputFile
-//                def manifestParser = new com.android.builder.core.DefaultManifestParser()
-//
-//            if (variant.zipAlign) {
-//                variant.zipAlign.outputFile = new File(apk.parentFile, newName.replace("-unaligned", ""));
-//            }
 
-//            applicationVariants.all { variant ->
-//
-//                def buildTypeOfApp = variant.buildType.name;  //apk类型dubug:release
-//                def appName = variant.mergedFlavor.versionName;
-//                def apk = variant.packageApplication.outputFile;
-//                println "--------------------" + appName;
-////                ${variant.name} productFlavors名+apk类型
-////                ${variant.mergedFlavor.versionName}  版本号
-////               getDate(); 获取时间
-//                def flavorNamedir = variant.dirName.replace("/", "-");
-//                def flavorName = variant.dirName.split("/")[0];  //渠道号
-//                def flavorMod = variant.dirName.split("/")[1];  //渠道模式
-////                println "--------------------" + dateApK;
-//                println "--------------------" + apk.name + getDate() + variant.mergedFlavor.versionName + variant.dirName.split("/")[1];
-////                def newName = apk.name.replace(".apk", "-renamed.apk");
-//                def newName = "${variant.dirName.split("/")[1]}_signed_${appName}_${getDate()}_${variant.mergedFlavor.versionName}_${flavorName}_unaligned.apk";
-//                variant.packageApplication.outputFile = new File(apk.parentFile, newName);
-//
-////                unaligned只是一个临时的apk可以不做处理???????????????
-//                if (variant.zipAlign) {
-//                    newName = "${variant.dirName.split("/")[1]}_signed_${appName}_${getDate()}_${variant.mergedFlavor.versionName}_${flavorName}.apk";
-//                    variant.zipAlign.outputFile = new File(apk.parentFile, newName);
-////                    variant.zipAlign.outputFile = new File(apk.parentFile, newName.replace("-unaligned", ""));
-//                }
-//            }
 
         }
     }
@@ -489,17 +456,6 @@ android {
 
     productFlavors {
 
-        /*小包渠道*/
-//        PCXZS {
-//
-////            applicationId = 'com.youxiachai.androidgradle.playstore'
-//
-//            manifestPlaceholders = [common_channel: "PCXZS"]
-//        }
-//
-//        androidbf {
-//            manifestPlaceholders = [common_channel: "androidbf"]
-//        }
         /*全包渠道*/
         pczhushougouxuan {
             manifestPlaceholders = [common_channel: "pczhushougouxuan"]
